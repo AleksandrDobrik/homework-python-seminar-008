@@ -26,9 +26,8 @@ def read_db(path: str):
         print(class_db)
     
         
-def save_db(path: str):
-    print(path)   
-    with open(path, 'w', encoding= 'UTF-8') as file:
+def save_db(path: str):   
+    with open((path+ '.txt'), 'w', encoding= 'UTF-8') as file:
         for key, item in class_db[path].items():
             file.write(key + '|')
             for key_item, new_item in item.items():

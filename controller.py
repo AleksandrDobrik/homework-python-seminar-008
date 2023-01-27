@@ -1,9 +1,6 @@
 import model
 import view
 
-   
-
-
 def get_list_lessons(my_db, num_class):
     list = []
     for item in my_db[num_class].keys():
@@ -17,9 +14,6 @@ def rating_students(my_db, students_dict, my_lesson, num_class ):
     for item in my_db[num_class][my_lesson].keys():
         my_db[num_class][my_lesson][item] = students_dict[item]
 
-
-
-
 def start():
     path = view.first_menu(model.class_list)
     model.read_db(path)
@@ -31,7 +25,5 @@ def start():
     students_dict = view.tree_menu(students_dict)
     
     rating_students(model.class_db, students_dict, lesson, path.replace('.txt', '')) 
-    print('posle', model.class_db)
     model.save_db(path.replace('.txt', ''))
     
-start()
