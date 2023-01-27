@@ -8,11 +8,11 @@ def get_class_list():
 def read_db(path: str):
     global class_db
     lesson_dict = dict()
-    student_dict = dict()
 
     with open (path, 'r', encoding='UTF-8') as file:
         my_list = file.readlines()
         for line in my_list:
+            student_dict = dict()
             new_list = line.split('|')            
             lesson = new_list[0]
             new_list= new_list[1].split(';')
@@ -20,19 +20,16 @@ def read_db(path: str):
             for i in range(0, len(new_list)-1, 2):
                 name = new_list[i]
                 rating = list(map(int,(new_list[i + 1].split(',')))) 
-                student_dict[name] = rating    
-                print(student_dict)
-            print(lesson)
+                student_dict[name] = rating 
             lesson_dict[lesson] = student_dict
-            print(lesson_dict[lesson])
-            print(lesson_dict[lesson].keys())
-            print(lesson_dict)
         class_db[path[0:path.find('.')]] = lesson_dict
-    print(class_db)
+        print(class_db)
+    
         
-def save_db(path: str):   
+def save_db(path: str):
+    print(path)   
     with open(path, 'w', encoding= 'UTF-8') as file:
-        for key, item in class_db['7a'].items():
+        for key, item in class_db[path].items():
             file.write(key + '|')
             for key_item, new_item in item.items():
                 file.write(key_item + ';')               
@@ -44,10 +41,7 @@ def save_db(path: str):
                 file.write(';')
             file.write('\n')
         
-read_db('7a.txt')
-print(class_db)
-save_db ('test.txt')                    
-
+                   
 
 
             
